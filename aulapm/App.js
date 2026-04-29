@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, StyleSheet, ActivityIndicator } from 'react-native';
-import { AULAS } from '../mocks/aulas'; // Importando o mock
+import { View, Text, FlatList, StyleSheet, ActivityIndicator, TouchableOpacity } from 'react-native';
+import { AULAS } from './src/mocks/aulas'; // Importando o mock
 
 export default function HomeScreen() {
-// HOOK 1: useState - Guarda a lista que será exibida
+  // HOOK 1: useState - Guarda a lista que será exibida
   const [dados, setDados] = useState([]);
   // HOOK 2: useState - Controla se está carregando (efeito visual)
   const [loading, setLoading] = useState(true);
@@ -16,6 +16,17 @@ export default function HomeScreen() {
       setLoading(false);
     }, 2000);
   }, []);
+
+  const alternarConclusao = (id) => {
+    // Mapeia o array atual e inverte o status apenas do item clicado
+    const novaLista = dados.map(item => {
+      if (item.id === id) {
+        return { ...item, concluida: !item.concluida };
+      }
+      return item;
+    });
+    setDados(novaLista);
+  };
 
   if (loading) {
     return (
@@ -30,10 +41,12 @@ export default function HomeScreen() {
         data={dados}
         keyExtractor={item => item.id}
         renderItem={({ item }) => (
-          <View style={styles.item}>
-            <Text>{item.titulo}</Text>
-            <Text>{item.concluida ? "✅" : "⏳"}</Text>
-          </View>
+          <TouchableOpacity onPress={() => alternarConclusao(item.id)}>
+            <View style={styles.item}>
+              <Text>{item.titulo}</Text>
+              <Text>{item.concluida ? "✅" : "⏳"}</Text>
+            </View>
+          </TouchableOpacity>
         )}
       />
     </View>
@@ -43,8 +56,8 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 20, backgroundColor: '#f5f5f5' },
   titulo: { fontSize: 24, fontWeight: 'bold', marginBottom: 20, marginTop: 40 },
-  item: { 
-    flexDirection: 'row', justifyContent: 'space-between', 
-    backgroundColor: '#fff', padding: 15, borderRadius: 10, marginBottom: 10 
+  item: {
+    flexDirection: 'row', justifyContent: 'space-between',
+    backgroundColor: '#fff', padding: 15, borderRadius: 10, marginBottom: 10
   }
 });
