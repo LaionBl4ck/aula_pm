@@ -3,21 +3,18 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 export default function Index() {
   const router = useRouter();
-
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Navegação em pilha</Text>
+      {/* <Text style={styles.title}>Navegação em pilha</Text>
       <Text style={styles.subtitle}>
         Este exemplo mostra uma navegação simples em stack, com uma tela inicial e uma tela de detalhes.
-      </Text>
-
+      </Text> */}
       <TouchableOpacity style={styles.button} onPress={() => router.push("/detalhes")}>
         <Text style={styles.buttonText}>Ir para a próxima tela</Text>
       </TouchableOpacity>
-
-      <Text style={styles.tip}>
+      {/* <Text style={styles.tip}>
         Passo 1: crie um Stack no layout. Passo 2: use router.push("/nomeDaTela") para abrir a tela.
-      </Text>
+      </Text> */}
     </View>
   );
 }
