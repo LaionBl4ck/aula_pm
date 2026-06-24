@@ -1,23 +1,23 @@
 import { useRouter } from "expo-router";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-export default function Index() {
+export default function Detalhes() {
   const router = useRouter();
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Navegação em pilha</Text>
+      <Text style={styles.title}>Tela de detalhes</Text>
       <Text style={styles.subtitle}>
-        Este exemplo mostra uma navegação simples em stack, com uma tela inicial e uma tela de detalhes.
+        Aqui você aprendeu a navegar para outra tela usando uma pilha de navegação.
       </Text>
 
-      <TouchableOpacity style={styles.button} onPress={() => router.push("/detalhes")}>
-        <Text style={styles.buttonText}>Ir para a próxima tela</Text>
+      <TouchableOpacity style={styles.button} onPress={() => router.back()}>
+        <Text style={styles.buttonText}>Voltar</Text>
       </TouchableOpacity>
 
-      <Text style={styles.tip}>
-        Passo 1: crie um Stack no layout. Passo 2: use router.push("/nomeDaTela") para abrir a tela.
-      </Text>
+      <TouchableOpacity style={styles.linkButton} onPress={() => router.push("/")}>
+        <Text style={styles.linkText}>Ir para a tela inicial</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     padding: 24,
-    backgroundColor: "#f5f7fb",
+    backgroundColor: "#f9fafb",
   },
   title: {
     fontSize: 24,
@@ -42,19 +42,22 @@ const styles = StyleSheet.create({
     color: "#4b5563",
   },
   button: {
-    backgroundColor: "#2563eb",
+    backgroundColor: "#16a34a",
     paddingVertical: 12,
     paddingHorizontal: 20,
     borderRadius: 8,
+    marginBottom: 12,
   },
   buttonText: {
     color: "#fff",
     fontWeight: "600",
   },
-  tip: {
-    marginTop: 16,
-    textAlign: "center",
-    color: "#6b7280",
-    fontSize: 14,
+  linkButton: {
+    marginTop: 12,
+    paddingVertical: 8,
+  },
+  linkText: {
+    color: "#2563eb",
+    fontWeight: "600",
   },
 });
